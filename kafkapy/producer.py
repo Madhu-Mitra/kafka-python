@@ -6,8 +6,8 @@ from kafka.errors import KafkaError
 
 def get_registered_user(i):
     
-    return {"name":i,
-    "adress":i
+    return {"First number":i,
+    "second number":i
     }
 
 
