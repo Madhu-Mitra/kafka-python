@@ -25,14 +25,16 @@ def on_send_success(record_metadata):
 def on_send_error(excp):
     log.error('I am an errback', exc_info=excp)
     # handle exception
+topic="Data_Topic"
 
 if __name__ == "__main__":
     i=0
     while 1 == 1:
         
         data = get_data(i)
-        
-        producer.send("Data_Topic", data).add_callback(on_send_success).add_errback(on_send_error)
+        key=bytes("key_"+str(i), encoding='utf-8')
+      
+        producer.send(topic=topic,key=key, value=data).add_callback(on_send_success).add_errback(on_send_error)
         #producer.send("Data_Topic", data).add_both(add_callback=on_send_success,add_errback=on_send_error)
         
         i=i+1
